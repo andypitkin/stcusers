@@ -17,7 +17,8 @@ import com.github.andypitkin.stcusers.users.dao.User;
 import jakarta.validation.Valid;
 
 /**
- * A RestController class that provides the rest interface for interacting with the Users entity.
+ * A RestController class that provides the rest interface for interacting with
+ * the Users entity.
  * 
  */
 @RestController
@@ -30,10 +31,13 @@ public class UserController {
     }
 
     /**
-     * Returns a UserDTO in the ResponseEntity body for the user defined by the id passed into the method. 
+     * Returns a UserDTO in the ResponseEntity body for the user defined by the id
+     * passed into the method.
      * 
      * @param userId the id of the user to retrieve
-     * @return Returns the UserDTO in the body of the ResponseEntity unless the user is not found in which the ResponseEntity will contain the NotFound status code.
+     * @return Returns the UserDTO in the body of the ResponseEntity unless the user
+     *         is not found in which case the ResponseEntity will contain the
+     *         NotFound status code.
      */
     @GetMapping("/user/{id}")
     public ResponseEntity<UserDTO> getUser(@PathVariable("id") long userId) {
@@ -47,21 +51,20 @@ public class UserController {
     }
 
     /**
-     * Creates a new user with the details provided in the userCreationRequest parameter
+     * Creates a new user with the details provided in the userCreationRequest
+     * parameter
      * 
      * @param userCreationRequest the details of the user to create
-     * @return Returns a ResponseEntity with the location header set to the location of the newly created user.
+     * @return Returns a ResponseEntity with the location header set to the location
+     *         of the newly created user.
      */
-    @PostMapping("/user") 
+    @PostMapping("/user")
     public ResponseEntity<Void> createUser(@Valid @RequestBody UserCreationDTO userCreationRequest) {
-        User newUser = userService.createUser(
-            userCreationRequest.getUsername(), userCreationRequest.getFirstName(), userCreationRequest.getLastName());
-            
-        URI location = ServletUriComponentsBuilder
-                    .fromCurrentRequest()
-                    .path("/{id}")
-                    .buildAndExpand(newUser.getUserId())
-                    .toUri();
+        User newUser = userService.createUser(userCreationRequest.getUsername(), userCreationRequest.getFirstName(),
+                userCreationRequest.getLastName());
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(newUser.getUserId()).toUri();
 
         return ResponseEntity.created(location).build();
     }

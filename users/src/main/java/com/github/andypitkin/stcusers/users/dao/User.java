@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
  */
 @Entity(name = "UserDetails")
 public class User {
-    
+
     @Convert(converter = EncryptedStringConverter.class)
     private String username;
     @Id
@@ -21,7 +21,15 @@ public class User {
     private String firstName;
     @Convert(converter = EncryptedStringConverter.class)
     private String lastName;
-    
+
+    /**
+     * Creates a User entity object
+     * 
+     * @param username  the username of the user
+     * @param userId    the userid of the user
+     * @param firstName the first name of the user
+     * @param lastName  the last name of the user
+     */
     public User(String username, long userId, String firstName, String lastName) {
         this.username = username;
         this.userId = userId;
@@ -29,7 +37,8 @@ public class User {
         this.lastName = lastName;
     }
 
-    public User() {}
+    public User() {
+    }
 
     /**
      * Retrieves the users username
@@ -103,7 +112,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    
     @Override
     public int hashCode() {
         final int prime = 31;

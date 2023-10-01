@@ -9,8 +9,9 @@ import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 /**
- * A class that handles converting String attributes to and from their encrypted form.
- *  
+ * A class that handles converting String attributes to and from their encrypted
+ * form.
+ * 
  */
 @Converter
 public class EncryptedStringConverter implements AttributeConverter<String, String> {
@@ -32,13 +33,13 @@ public class EncryptedStringConverter implements AttributeConverter<String, Stri
 
     @Override
     public String convertToEntityAttribute(String dbData) {
-        //pull out the salt from the stored data
+        // pull out the salt from the stored data
         int separatorIndex = dbData.lastIndexOf(";");
         String encryptedValue = dbData.substring(0, separatorIndex);
-        String salt = dbData.substring(separatorIndex+1);
+        String salt = dbData.substring(separatorIndex + 1);
         TextEncryptor encryptor = Encryptors.text(secretKey, salt);
         // decrypt the encrypted value only for use in the application
         return encryptor.decrypt(encryptedValue);
     }
-    
+
 }

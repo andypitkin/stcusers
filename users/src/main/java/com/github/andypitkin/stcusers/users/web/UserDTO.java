@@ -12,14 +12,14 @@ public class UserDTO {
     private final long userId;
     private final String firstName;
     private final String lastName;
-    
+
     /**
      * Creates a UserDTO with the values provided.
      * 
-     * @param username the username of the user
-     * @param userId the user id of the user
+     * @param username  the username of the user
+     * @param userId    the user id of the user
      * @param firstName the first name of the user
-     * @param lastName the last name of the user
+     * @param lastName  the last name of the user
      */
     public UserDTO(String username, long userId, String firstName, String lastName) {
         this.username = username;
@@ -114,5 +114,4 @@ public class UserDTO {
         return true;
     }
 
-    
 }
